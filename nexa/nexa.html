@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXA — Premium Future Brand</title>
+  <meta name="description" content="NEXA futuristic premium website" />
+  <style>
+    :root{
+      --bg:#04070d;
+      --bg2:#08111f;
+      --bg3:#0b1728;
+      --panel:rgba(10,18,31,.78);
+      --panel2:rgba(8,14,24,.92);
+      --text:#eef6ff;
+      --muted:#93a9c8;
+      --line:rgba(108,171,255,.14);
+      --line2:rgba(108,171,255,.28);
+      --blue:#4aa5ff;
+      --blue2:#1f87ff;
+      --cyan:#6fe3ff;
+      --violet:#8a6bff;
+      --green:#7cffba;
+      --shadow-lg:0 18px 50px rgba(0,0,0,.38);
+      --shadow-xl:0 28px 90px rgba(0,0,0,.55);
+      --glow:0 0 30px rgba(74,165,255,.30);
+      --radius-xl:34px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:12px;
+      --max:1380px;
+      --header-h:84px;
+      --tr:.28s ease;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(74,165,255,.12), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(111,227,255,.08), transparent 22%),
+        radial-gradient(circle at 15% 85%, rgba(138,107,255,.08), transparent 28%),
+        linear-gradient(180deg,#02050b 0%, #050b14 30%, #04070d 100%);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    body[data-lang="ar"]{
+      direction:rtl;
+      font-family:Inter,"Segoe UI",Tahoma,sans-serif;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,textarea,select{font:inherit;color:inherit}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin-inline:auto;
+    }
+
+    .t-en,.t-ar{display:none}
+    body[data-lang="en"] .t-en{display:inline}
+    body[data-lang="en"] .t-en.block{display:block}
+    body[data-lang="ar"] .t-ar{display:inline}
+    body[data-lang="ar"] .t-ar.block{display:block}
+
+    .bg-noise,.bg-grid,.bg-stars,.bg-blobs{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-10;
+    }
+
+    .bg-noise{
+      opacity:.06;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.75) 0 .7px, transparent 1px),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,.4) 0 .7px, transparent 1px),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,.3) 0 .7px, transparent 1px),
+        radial-gradient(circle at 90% 50%, rgba(255,255,255,.24) 0 .7px, transparent 1px);
+      background-size:220px 220px,260px 260px,180px 180px,210px 210px;
+      mix-blend-mode:screen;
+    }
+
+    .bg-grid{
+      background:
+        linear-gradient(rgba(84,152,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(84,152,255,.04) 1px, transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.92), rgba(0,0,0,.18));
+    }
+
+    .bg-blobs::before,.bg-blobs::after{
+      content:"";
+      position:absolute;
+      width:44vw;height:44vw;border-radius:50%;
+      filter:blur(120px);
+      opacity:.15;
+      animation:blobMove 18s ease-in-out infinite;
+    }
+
+    .bg-blobs::before{
+      left:-10vw;top:-12vw;
+      background:radial-gradient(circle, rgba(74,165,255,.72), transparent 60%);
+    }
+
+    .bg-blobs::after{
+      right:-12vw;top:10vh;
+      background:radial-gradient(circle, rgba(111,227,255,.45), transparent 62%);
+      animation-delay:-7s;
+    }
+
+    @keyframes blobMove{
+      0%,100%{transform:translate(0,0) scale(1)}
+      50%{transform:translate(2vw,2vw) scale(1.08)}
+    }
+
+    #starsCanvas,#introCanvas,#heroCanvas,#dashCanvas{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .btn,.btn-ghost,.icon-btn,.lang-btn{
+      border:1px solid var(--line);
+      background:rgba(10,18,31,.72);
+      color:var(--text);
+      border-radius:999px;
+      transition:var(--tr);
+      cursor:pointer;
+      backdrop-filter:blur(10px);
+    }
+
+    .btn,.btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      font-weight:700;
+      letter-spacing:.03em;
+    }
+
+    .btn{
+      background:linear-gradient(180deg, rgba(74,165,255,.18), rgba(31,135,255,.18));
+      box-shadow:var(--glow);
+    }
+
+    .btn:hover,.btn-ghost:hover,.icon-btn:hover,.lang-btn:hover{
+      transform:translateY(-2px);
+      border-color:var(--line2);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .icon-btn,.lang-btn{
+      width:46px;height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+
+    .section{
+      position:relative;
+      padding:34px 0 0;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:18px;
+      margin-bottom:24px;
+    }
+
+    .section-head h2{
+      margin:0 0 10px;
+      font-size:clamp(2rem,4vw,3.4rem);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .section-head p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.85;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      font-size:.78rem;
+      color:#cfe4ff;
+    }
+
+    .kicker::before{
+      content:"";
+      width:42px;height:1px;
+      background:linear-gradient(90deg, rgba(74,165,255,0), rgba(74,165,255,.86));
+    }
+
+    .card,.panel,.game-card,.dash-card,.job-card,.showcase-card,.faq-item,.contact-card,.social-card,.lang-card,.music-card,.universe-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(10,18,31,.88), rgba(8,14,24,.78));
+      box-shadow:var(--shadow-lg);
+    }
+
+    .card::before,.panel::before,.game-card::before,.dash-card::before,.job-card::before,.showcase-card::before,.faq-item::before,.contact-card::before,.social-card::before,.lang-card::before,.music-card::before,.universe-card::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(160deg, rgba(74,165,255,.06), transparent 30%, transparent 76%, rgba(111,227,255,.03));
+      pointer-events:none;
+    }
+
+    .inner{position:relative;z-index:1;padding:24px}
+
+    .grid-2,.grid-3,.grid-4,.grid-5,.grid-10{
+      display:grid;
+      gap:18px;
+    }
+
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid-10{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* INTRO */
+    .intro{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at center, rgba(26,55,95,.16), transparent 20%),
+        linear-gradient(180deg, #010307 0%, #030711 100%);
+      transition:opacity .8s ease, visibility .8s ease;
+    }
+
+    .intro.hide{opacity:0;visibility:hidden}
+
+    .intro-center{
+      position:relative;
+      width:min(620px,82vw);
+      aspect-ratio:1/1;
+      display:grid;
+      place-items:center;
+    }
+
+    .intro-center::before,.intro-center::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(108,171,255,.12);
+      animation:spinA 16s linear infinite;
+    }
+
+    .intro-center::before{inset:2%}
+    .intro-center::after{
+      inset:12%;
+      border-style:dashed;
+      animation-duration:9s;
+      animation-direction:reverse;
+    }
+
+    .intro-brand{
+      position:absolute;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    .intro-brand strong{
+      display:block;
+      font-size:clamp(2rem,6vw,4.7rem);
+      letter-spacing:.55em;
+      padding-left:.55em;
+      text-shadow:0 0 24px rgba(74,165,255,.28);
+    }
+
+    .intro-brand span{
+      display:block;
+      margin-top:14px;
+      color:#cfe4ff;
+      font-size:.86rem;
+      letter-spacing:.3em;
+      text-transform:uppercase;
+    }
+
+    .intro-skip{
+      position:absolute;
+      right:32px;
+      bottom:32px;
+    }
+
+    @keyframes spinA{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
+
+    @keyframes spinB{
+      from{transform:rotate(360deg)}
+      to{transform:rotate(0deg)}
+    }
+        /* HEADER */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      height:var(--header-h);
+      backdrop-filter:blur(16px);
+      background:linear-gradient(180deg, rgba(3,7,14,.82), rgba(3,7,14,.46));
+      border-bottom:1px solid rgba(108,171,255,.08);
+    }
+
+    .header-inner{
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-symbol{
+      position:relative;
+      width:48px;height:48px;
+      border-radius:50%;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:radial-gradient(circle at center, #03070d 0 22%, rgba(8,15,27,1) 22% 36%, rgba(74,165,255,.22) 42% 48%, rgba(0,0,0,0) 62%);
+      box-shadow:inset 0 0 20px rgba(0,0,0,.7), 0 0 24px rgba(74,165,255,.18);
+      flex-shrink:0;
+    }
+
+    .brand-symbol::before,.brand-symbol::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      inset:8px;
+      border-top:2px solid rgba(111,227,255,.84);
+      border-left:1px solid rgba(111,227,255,.18);
+      border-right:1px solid transparent;
+      border-bottom:1px solid transparent;
+      animation:spinA 6s linear infinite;
+      filter:drop-shadow(0 0 10px rgba(111,227,255,.48));
+    }
+
+    .brand-symbol::after{
+      inset:14px;
+      animation-direction:reverse;
+      animation-duration:4.6s;
+      border-top-color:rgba(138,107,255,.74);
+    }
+
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+
+    .brand-copy strong{
+      letter-spacing:.34em;
+      font-size:1rem;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .brand-copy span{
+      font-size:.74rem;
+      letter-spacing:.14em;
+      color:var(--muted);
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .desktop-nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .nav-link{
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--muted);
+      transition:var(--tr);
+      border:1px solid transparent;
+      white-space:nowrap;
+    }
+
+    .nav-link:hover,.nav-link.active{
+      color:var(--text);
+      background:rgba(74,165,255,.08);
+      border-color:rgba(108,171,255,.12);
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink:0;
+    }
+
+    .menu-toggle{display:none}
+
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      top:calc(var(--header-h) + 8px);
+      left:16px;
+      right:16px;
+      z-index:90;
+      padding:16px;
+      border-radius:24px;
+      background:rgba(7,12,22,.94);
+      border:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow-lg);
+      gap:8px;
+    }
+
+    .mobile-menu.open{display:grid}
+
+    .mobile-menu .nav-link{
+      background:rgba(255,255,255,.02);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:calc(100vh - var(--header-h));
+      display:flex;
+      align-items:center;
+      padding-top:34px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border-radius:999px;
+      padding:8px 14px;
+      background:rgba(8,14,26,.6);
+      border:1px solid var(--line);
+      color:#cfe4ff;
+      font-size:.82rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:8px;height:8px;border-radius:50%;
+      background:var(--cyan);
+      box-shadow:0 0 12px rgba(111,227,255,.74);
+      animation:pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot{
+      0%,100%{transform:scale(1);opacity:1}
+      50%{transform:scale(1.4);opacity:.62}
+    }
+
+    .hero-copy h1{
+      margin:20px 0 18px;
+      font-size:clamp(2.9rem,7vw,6.5rem);
+      line-height:.95;
+      letter-spacing:-.045em;
+      font-weight:900;
+    }
+
+    .hero-copy h1 .line{display:block}
+    .hero-copy h1 .accent{
+      background:linear-gradient(90deg,#f4f9ff 0%, #b9d8ff 40%, #6fd0ff 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1.04rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .hero-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .mini-box{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(10,18,33,.88), rgba(7,12,22,.74));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-lg);
+      padding:18px;
+      min-height:116px;
+    }
+
+    .mini-box strong{
+      display:block;
+      font-size:1.42rem;
+      margin-bottom:8px;
+    }
+
+    .mini-box span{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.94rem;
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:700px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-stack{
+      width:min(760px,100%);
+      aspect-ratio:1/1;
+      position:relative;
+      display:grid;
+      place-items:center;
+      isolation:isolate;
+    }
+
+    .hero-orbit,.hero-orbit::before,.hero-orbit::after{
+      position:absolute;
+      border-radius:50%;
+    }
+
+    .hero-orbit{
+      inset:0;
+      border:1px solid rgba(108,171,255,.08);
+      animation:spinA 34s linear infinite;
+    }
+
+    .hero-orbit::before,.hero-orbit::after{
+      content:"";
+      inset:10%;
+      border:1px dashed rgba(108,171,255,.10);
+    }
+
+    .hero-orbit::after{
+      inset:22%;
+      border-style:solid;
+      animation:spinB 20s linear infinite;
+      border-color:rgba(111,227,255,.08);
+    }
+
+    .hero-core{
+      position:relative;
+      width:68%;
+      aspect-ratio:1/1;
+      border-radius:50%;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at center, #02060d 0 18%, rgba(8,15,28,1) 18% 30%, rgba(18,31,56,.95) 32% 40%, rgba(74,165,255,.18) 42% 50%, rgba(111,227,255,.08) 55% 62%, rgba(0,0,0,0) 70%);
+      box-shadow:inset 0 0 120px rgba(0,0,0,.82), 0 0 46px rgba(74,165,255,.20), 0 0 120px rgba(111,227,255,.08);
+      border:1px solid rgba(108,171,255,.14);
+    }
+
+    .hero-core::before,.hero-core::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      inset:10%;
+      border-top:2px solid rgba(111,227,255,.9);
+      border-left:1px solid rgba(111,227,255,.18);
+      border-right:1px solid transparent;
+      border-bottom:1px solid transparent;
+      animation:spinA 8s linear infinite;
+      filter:drop-shadow(0 0 14px rgba(111,227,255,.42));
+    }
+
+    .hero-core::after{
+      inset:20%;
+      animation-duration:5.4s;
+      animation-direction:reverse;
+      border-top-color:rgba(138,107,255,.68);
+    }
+
+    .hero-core-label{
+      position:absolute;
+      inset:auto 0 17%;
+      text-align:center;
+      z-index:3;
+      pointer-events:none;
+    }
+
+    .hero-core-label strong{
+      display:block;
+      font-size:clamp(2rem,5vw,4.8rem);
+      letter-spacing:.46em;
+      padding-left:.46em;
+      text-shadow:0 0 20px rgba(74,165,255,.32);
+    }
+
+    .hero-core-label span{
+      display:block;
+      margin-top:12px;
+      color:#cfe4ff;
+      font-size:.82rem;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+    }
+
+    .float-card{
+      position:absolute;
+      min-width:180px;
+      max-width:220px;
+      padding:14px 16px;
+      border-radius:20px;
+      background:rgba(8,14,26,.72);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(10px);
+      animation:floatSoft 6s ease-in-out infinite;
+      z-index:3;
+    }
+
+    .float-card small{
+      display:block;
+      color:var(--muted);
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin-bottom:8px;
+    }
+
+    .float-card strong{
+      display:block;
+      font-size:.98rem;
+      line-height:1.55;
+    }
+
+    .float-1{left:0;top:10%}
+    .float-2{right:0;top:14%;animation-delay:-1.4s}
+    .float-3{left:3%;bottom:16%;animation-delay:-2.3s}
+    .float-4{right:4%;bottom:12%;animation-delay:-3.2s}
+
+    @keyframes floatSoft{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+        /* SECTION CONTENT */
+    .icon{
+      width:52px;height:52px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:rgba(74,165,255,.1);
+      border:1px solid var(--line);
+      margin-bottom:16px;
+      box-shadow:inset 0 0 20px rgba(255,255,255,.015);
+      font-size:1.2rem;
+    }
+
+    .card h3,.panel h3,.game-card h3,.dash-card h3,.job-card h3,.showcase-card h3,.faq-item h3,.contact-card h3,.social-card h3,.lang-card h3,.music-card h3,.universe-card h3{
+      margin:0 0 10px;
+      font-size:1.22rem;
+      line-height:1.35;
+    }
+
+    .card p,.panel p,.game-card p,.dash-card p,.job-card p,.showcase-card p,.faq-item p,.contact-card p,.social-card p,.lang-card p,.music-card p,.universe-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.82;
+    }
+
+    .tiny-pills,.game-tags,.contact-actions,.footer-mini-links,.dashboard-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(74,165,255,.08);
+      border:1px solid rgba(108,171,255,.12);
+      color:#dcebff;
+      font-size:.86rem;
+    }
+
+    .showcase-visual{
+      position:relative;
+      min-height:380px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at center, rgba(74,165,255,.14), transparent 18%),
+        linear-gradient(180deg, rgba(7,12,22,1), rgba(3,7,13,.96));
+    }
+
+    .showcase-visual::before{
+      content:"";
+      position:absolute;
+      inset:24px;
+      border-radius:28px;
+      border:1px dashed rgba(108,171,255,.10);
+    }
+
+    .showcase-visual::after{
+      content:"";
+      position:absolute;
+      width:240px;height:240px;
+      left:50%;top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at center, #02060d 0 20%, rgba(10,18,31,1) 20% 32%, rgba(74,165,255,.26) 36% 44%, rgba(111,227,255,.08) 50% 56%, rgba(0,0,0,0) 66%);
+      box-shadow:inset 0 0 70px rgba(0,0,0,.78), 0 0 40px rgba(74,165,255,.18);
+      animation:pulseCore 6s ease-in-out infinite;
+    }
+
+    @keyframes pulseCore{
+      0%,100%{transform:translate(-50%,-50%) scale(1)}
+      50%{transform:translate(-50%,-50%) scale(1.05)}
+    }
+
+    .dashboard{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .dash-screen{
+      position:relative;
+      min-height:440px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at center, rgba(74,165,255,.08), transparent 20%),
+        linear-gradient(180deg, rgba(8,14,26,1), rgba(4,8,14,.96));
+    }
+
+    .dash-overlay{
+      position:absolute;
+      inset:auto 18px 18px 18px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      z-index:2;
+    }
+
+    .dash-mini{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(8,14,26,.78);
+      border:1px solid var(--line);
+      backdrop-filter:blur(8px);
+    }
+
+    .dash-mini strong{
+      display:block;
+      font-size:1.2rem;
+      margin-bottom:6px;
+    }
+
+    .dash-mini span{
+      color:var(--muted);
+      line-height:1.5;
+      font-size:.88rem;
+    }
+
+    .game-card{min-height:380px}
+    .game-thumb{
+      position:relative;
+      height:200px;
+      margin:0 0 18px;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 35%, rgba(74,165,255,.22), transparent 24%),
+        linear-gradient(180deg, rgba(8,14,26,1), rgba(4,8,14,.96));
+    }
+
+    .game-thumb::before{
+      content:"";
+      position:absolute;
+      width:160px;height:160px;
+      left:50%;top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:radial-gradient(circle at center, #03070d 0 18%, rgba(11,20,35,1) 18% 30%, rgba(74,165,255,.30) 36% 44%, rgba(0,0,0,0) 58%);
+      box-shadow:inset 0 0 60px rgba(0,0,0,.8), 0 0 28px rgba(74,165,255,.14);
+    }
+
+    .game-thumb::after{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:18px;
+      border:1px dashed rgba(108,171,255,.10);
+      animation:spinA 16s linear infinite;
+    }
+
+    .game-badge{
+      position:absolute;
+      top:14px;left:14px;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(8,14,26,.78);
+      border:1px solid var(--line);
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#dcebff;
+    }
+
+    .game-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .status{
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(74,165,255,.08);
+      border:1px solid rgba(108,171,255,.12);
+      font-size:.74rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      white-space:nowrap;
+    }
+
+    .job-list,.contact-list,.footer-links{
+      display:grid;
+      gap:10px;
+      list-style:none;
+      padding:0;
+      margin:18px 0 0;
+    }
+
+    .job-list li,.contact-list li,.footer-links li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:#dcebff;
+      line-height:1.7;
+    }
+
+    .job-list li::before,.contact-list li::before,.footer-links li::before{
+      content:"";
+      width:8px;height:8px;border-radius:50%;
+      background:linear-gradient(180deg,var(--cyan),var(--blue));
+      margin-top:.68em;
+      flex-shrink:0;
+      box-shadow:0 0 10px rgba(111,227,255,.6);
+    }
+
+    .faq-q{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      cursor:pointer;
+      padding:24px;
+      position:relative;
+      z-index:1;
+    }
+
+    .faq-arrow{
+      width:36px;height:36px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      transition:var(--tr);
+      flex-shrink:0;
+    }
+
+    .faq-a{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+      padding:0 24px;
+      position:relative;
+      z-index:1;
+    }
+
+    .faq-item.open .faq-a{
+      max-height:220px;
+      padding-bottom:24px;
+    }
+
+    .faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+    .contact-form{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field, textarea, select{
+      width:100%;
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      padding:14px 16px;
+      outline:none;
+      transition:var(--tr);
+    }
+
+    .field:focus, textarea:focus, select:focus{
+      border-color:rgba(108,171,255,.34);
+      box-shadow:0 0 0 4px rgba(74,165,255,.08);
+    }
+
+    textarea{
+      min-height:140px;
+      resize:vertical;
+    }
+
+    .contact-direct{
+      display:grid;
+      gap:14px;
+    }
+
+    .contact-box{
+      border-radius:22px;
+      padding:18px;
+      background:rgba(255,255,255,.02);
+      border:1px solid var(--line);
+    }
+
+    .music-note{
+      font-size:.9rem;
+      color:#dcebff;
+      margin-top:14px;
+    }
+
+    .footer{
+      padding:36px 0 40px;
+      margin-top:28px;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+    }
+
+    .scroll-top{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:52px;height:52px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(8,14,26,.82);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(10px);
+      transition:var(--tr);
+      z-index:60;
+      backdrop-filter:blur(10px);
+    }
+
+    .scroll-top.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    @media (max-width: 1180px){
+      .hero-grid,.dashboard,.footer-grid,.grid-2,.grid-3,.grid-4,.grid-5,.grid-10,.field-grid,.dash-overlay{
+        grid-template-columns:1fr !important;
+      }
+    }
+
+    @media (max-width: 900px){
+      .desktop-nav,.desktop-only{display:none}
+      .menu-toggle{display:inline-flex}
+      .hero-visual{min-height:520px}
+      .hero-mini-grid{grid-template-columns:1fr}
+      .float-card{display:none}
+    }
+
+    @media (max-width: 560px){
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .site-header{height:74px}
+      :root{--header-h:74px}
+      .hero-copy h1{font-size:clamp(2.5rem,14vw,4.4rem)}
+      .inner{padding:20px}
+      .hero-core{width:82%}
+      .intro-brand strong{letter-spacing:.34em;padding-left:.34em}
+      .intro-skip{right:16px;bottom:16px}
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <div class="bg-noise"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-blobs"></div>
+  <div class="bg-stars"><canvas id="starsCanvas"></canvas></div>
+
+  <!-- =========================
+       INTRO / LOADING ANIMATION
+       صورة اللوجو لازم تكون بنفس المجلد واسمها:
+       Nexa.png
+  ========================== -->
+  <div class="intro" id="intro">
+    <div class="intro-center">
+      <canvas id="introCanvas"></canvas>
+      <div class="intro-brand">
+        <strong>NEXA</strong>
+        <span class="t-en block">A New Era of Creation</span>
+        <span class="t-ar block">بداية عصر جديد من الإبداع</span>
+      </div>
+    </div>
+    <button class="btn-ghost intro-skip" id="skipIntro">
+      <span class="t-en">Skip</span>
+      <span class="t-ar">تخطي</span>
+    </button>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <div class="brand-symbol"></div>
+        <div class="brand-copy">
+          <strong>NEXA</strong>
+          <span>Games • Technology • Future</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav">
+        <a class="nav-link active" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#showcase">Showcase</a>
+        <a class="nav-link" href="#games">Games</a>
+        <a class="nav-link" href="#dashboard">Dashboard</a>
+        <a class="nav-link" href="#jobs">Jobs</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="lang-btn" id="langToggle">AR</button>
+        <a href="#contact" class="btn desktop-only">
+          <span class="t-en">Join the Journey</span>
+          <span class="t-ar">انضم إلى الرحلة</span>
+        </a>
+        <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="nav-link" href="#home">Home</a>
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#showcase">Showcase</a>
+    <a class="nav-link" href="#games">Games</a>
+    <a class="nav-link" href="#dashboard">Dashboard</a>
+    <a class="nav-link" href="#jobs">Jobs</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </div>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">
+            <span class="t-en">Premium Future Brand</span>
+            <span class="t-ar">براند مستقبلي فاخر</span>
+          </div>
+
+          <h1>
+            <span class="line t-en">Build the future</span>
+            <span class="line accent t-en">through NEXA</span>
+
+            <span class="line t-ar">ابنِ المستقبل</span>
+            <span class="line accent t-ar">من خلال NEXA</span>
+          </h1>
+
+          <p class="t-en block">
+            NEXA is a futuristic premium brand designed for game development, technology,
+            digital creativity, and long-term expansion. It starts as a powerful online identity
+            and grows over time into bigger projects, stronger showcases, and a complete creative ecosystem.
+          </p>
+
+          <p class="t-ar block">
+            NEXA هو براند مستقبلي فاخر مخصص لتطوير الألعاب والتقنية والإبداع الرقمي والتوسع على المدى الطويل.
+            يبدأ كهوية قوية على الإنترنت ثم يكبر مع الوقت ليصير مشاريع أكبر وعروض أقوى ونظام إبداعي متكامل.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#games" class="btn">
+              <span class="t-en">Explore Games</span>
+              <span class="t-ar">استكشف الألعاب</span>
+            </a>
+            <a href="#showcase" class="btn-ghost">
+              <span class="t-en">See Showcase</span>
+              <span class="t-ar">شاهد العرض</span>
+            </a>
+          </div>
+
+          <div class="hero-mini-grid">
+            <div class="mini-box">
+              <strong>10</strong>
+              <span class="t-en">Upcoming game slots prepared for future titles.</span>
+              <span class="t-ar">10 خانات ألعاب جاهزة للعناوين القادمة.</span>
+            </div>
+            <div class="mini-box">
+              <strong>AAA</strong>
+              <span class="t-en">A cinematic presentation style inspired by premium brands.</span>
+              <span class="t-ar">أسلوب عرض سينمائي مستوحى من البراندات الفخمة.</span>
+            </div>
+            <div class="mini-box">
+              <strong>∞</strong>
+              <span class="t-en">Built to grow beyond one idea or one single game.</span>
+              <span class="t-ar">مبني ليكبر أبعد من فكرة واحدة أو لعبة واحدة.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-stack">
+            <div class="hero-orbit"></div>
+            <div class="hero-core">
+              <canvas id="heroCanvas"></canvas>
+              <div class="hero-core-label">
+                <strong>NEXA</strong>
+                <span class="t-en">Power • Mystery • Creation</span>
+                <span class="t-ar">قوة • غموض • إبداع</span>
+              </div>
+            </div>
+
+            <div class="float-card float-1">
+              <small>Core Identity</small>
+              <strong class="t-en">Luxury-tech branding with a strong visual presence.</strong>
+              <strong class="t-ar">هوية تقنية فاخرة بحضور بصري قوي.</strong>
+            </div>
+
+            <div class="float-card float-2">
+              <small>Main Focus</small>
+              <strong class="t-en">Games, technology, visual direction, and future projects.</strong>
+              <strong class="t-ar">ألعاب وتقنية وتوجه بصري ومشاريع مستقبلية.</strong>
+            </div>
+
+            <div class="float-card float-3">
+              <small>Ambition</small>
+              <strong class="t-en">A brand that feels bigger than its current stage.</strong>
+              <strong class="t-ar">براند يعطي إحساسًا أكبر من مرحلته الحالية.</strong>
+            </div>
+
+            <div class="float-card float-4">
+              <small>Long Vision</small>
+              <strong class="t-en">From one website to a full creative ecosystem.</strong>
+              <strong class="t-ar">من موقع واحد إلى منظومة إبداعية كاملة.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">About NEXA</span>
+              <span class="t-ar">عن NEXA</span>
+            </div>
+            <h2 class="t-en">More than a website</h2>
+            <h2 class="t-ar">أكثر من مجرد موقع</h2>
+          </div>
+          <p class="t-en">
+            NEXA is meant to feel like the start of something real: a premium brand for games,
+            technology, visuals, experimental concepts, and future opportunities. The goal is not noise.
+            The goal is impact, style, recognition, and growth.
+          </p>
+          <p class="t-ar">
+            NEXA مصمم ليعطي إحساس بداية شيء حقيقي: براند فاخر للألعاب والتقنية والهوية البصرية
+            والأفكار التجريبية والفرص المستقبلية. الهدف ليس الضجيج، بل التأثير والأسلوب والتميّز والنمو.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card reveal"><div class="inner">
+            <div class="icon">✦</div>
+            <h3 class="t-en">Strong Identity</h3>
+            <h3 class="t-ar">هوية قوية</h3>
+            <p class="t-en">A memorable presence built through visuals, tone, structure, and consistency.</p>
+            <p class="t-ar">حضور لا يُنسى مبني على الشكل والنبرة والتنظيم والاستمرارية.</p>
+          </div></div>
+
+          <div class="card reveal"><div class="inner">
+            <div class="icon">⚙</div>
+            <h3 class="t-en">Creative Growth</h3>
+            <h3 class="t-ar">نمو إبداعي</h3>
+            <p class="t-en">Every future project adds weight to the brand and sharpens its direction.</p>
+            <p class="t-ar">كل مشروع قادم يضيف وزنًا للبراند ويزيد وضوح اتجاهه.</p>
+          </div></div>
+
+          <div class="card reveal"><div class="inner">
+            <div class="icon">◎</div>
+            <h3 class="t-en">Future Expansion</h3>
+            <h3 class="t-ar">توسع مستقبلي</h3>
+            <p class="t-en">The brand can later hold games, systems, services, tools, and more.</p>
+            <p class="t-ar">يمكن للبراند لاحقًا أن يحتوي ألعابًا وأنظمة وخدمات وأدوات وغير ذلك.</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="showcase">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">Showcase</span>
+              <span class="t-ar">العرض</span>
+            </div>
+            <h2 class="t-en">A cinematic digital presence</h2>
+            <h2 class="t-ar">حضور رقمي سينمائي</h2>
+          </div>
+          <p class="t-en">
+            This section exists to make NEXA feel premium, futuristic, and memorable. It is not only information.
+            It is atmosphere, motion, and presentation.
+          </p>
+          <p class="t-ar">
+            هذا القسم موجود ليجعل NEXA يبدو فاخرًا ومستقبليًا ولا يُنسى. ليس مجرد معلومات، بل أجواء وحركة وطريقة عرض.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="showcase-card reveal">
+            <div class="inner">
+              <div class="showcase-visual"></div>
+            </div>
+          </div>
+
+          <div class="showcase-card reveal">
+            <div class="inner">
+              <div class="icon">◉</div>
+              <h3 class="t-en">What people should feel</h3>
+              <h3 class="t-ar">ما الذي يجب أن يشعر به الزائر</h3>
+              <p class="t-en">
+                Curiosity, mystery, confidence, quality, and ambition. The page should instantly feel more polished
+                than a normal beginner website and more memorable than a simple portfolio.
+              </p>
+              <p class="t-ar">
+                الفضول والغموض والثقة والجودة والطموح. يجب أن يبدو الموقع أكثر احترافًا من موقع مبتدئ عادي
+                وأكثر رسوخًا في الذاكرة من بورتفوليو بسيط.
+              </p>
+              <div class="tiny-pills">
+                <span class="pill">Luxury</span>
+                <span class="pill">Future</span>
+                <span class="pill">Games</span>
+                <span class="pill">Tech</span>
+                <span class="pill">NEXA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-top:18px;">
+          <div class="showcase-card reveal"><div class="inner">
+            <h3 class="t-en">Visual Power</h3>
+            <h3 class="t-ar">قوة بصرية</h3>
+            <p class="t-en">Dark backgrounds, glowing highlights, motion, depth, and premium spacing.</p>
+            <p class="t-ar">خلفيات داكنة ولمعات ضوئية وحركة وعمق ومسافات احترافية.</p>
+          </div></div>
+
+          <div class="showcase-card reveal"><div class="inner">
+            <h3 class="t-en">Brand Voice</h3>
+            <h3 class="t-ar">صوت البراند</h3>
+            <p class="t-en">Confident, futuristic, clear, ambitious, and never cheap or random.</p>
+            <p class="t-ar">واثق ومستقبلي وواضح وطموح، وليس عشوائيًا أو رخيص الأسلوب.</p>
+          </div></div>
+
+          <div class="showcase-card reveal"><div class="inner">
+            <h3 class="t-en">Scalability</h3>
+            <h3 class="t-ar">قابلية التوسع</h3>
+            <p class="t-en">Prepared for future games, future systems, future pages, and stronger reveals.</p>
+            <p class="t-ar">جاهز للألعاب القادمة والأنظمة القادمة والصفحات القادمة والعروض الأقوى.</p>
+          </div></div>
+
+          <div class="showcase-card reveal"><div class="inner">
+            <h3 class="t-en">AAA Feel</h3>
+            <h3 class="t-ar">إحساس AAA</h3>
+            <p class="t-en">The experience should feel closer to a premium game brand than a normal website.</p>
+            <p class="t-ar">يجب أن تبدو التجربة أقرب إلى براند ألعاب فاخر من موقع عادي.</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">Upcoming Games</span>
+              <span class="t-ar">الألعاب القادمة</span>
+            </div>
+            <h2 class="t-en">10 future game slots</h2>
+            <h2 class="t-ar">10 خانات ألعاب مستقبلية</h2>
+          </div>
+          <p class="t-en">
+            These cards are intentionally left as Coming Soon so you can replace names later without changing the whole structure.
+          </p>
+          <p class="t-ar">
+            هذه البطاقات متروكة عمدًا كـ Coming Soon لكي تستطيع تغيير الأسماء لاحقًا دون تعديل كامل البنية.
+          </p>
+        </div>
+
+        <div class="grid-10">
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 01</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Concept</span></div>
+            <p class="t-en">Reserved for a future action-focused title under NEXA.</p>
+            <p class="t-ar">محجوزة لعنوان أكشن مستقبلي تحت NEXA.</p>
+            <div class="game-tags"><span class="pill">Original IP</span><span class="pill">Future Reveal</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 02</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Planning</span></div>
+            <p class="t-en">Prepared for a different gameplay direction and later polish.</p>
+            <p class="t-ar">مجهزة لاتجاه لعب مختلف وتطوير لاحق.</p>
+            <div class="game-tags"><span class="pill">Prototype</span><span class="pill">Expandable</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 03</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Reserved</span></div>
+            <p class="t-en">A future slot for a stronger project reveal when ready.</p>
+            <p class="t-ar">خانة مستقبلية لعرض مشروع أقوى عند الجهوزية.</p>
+            <div class="game-tags"><span class="pill">Mystery</span><span class="pill">NEXA</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 04</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Soon</span></div>
+            <p class="t-en">Another concept slot for future ideas and experiments.</p>
+            <p class="t-ar">خانة أخرى لأفكار وتجارب مستقبلية.</p>
+            <div class="game-tags"><span class="pill">Creative</span><span class="pill">Idea</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 05</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Locked</span></div>
+            <p class="t-en">This card can later hold a major title with its own universe.</p>
+            <p class="t-ar">يمكن لهذه البطاقة لاحقًا أن تحمل عنوانًا كبيرًا بعالمه الخاص.</p>
+            <div class="game-tags"><span class="pill">World</span><span class="pill">Future</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 06</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Draft</span></div>
+            <p class="t-en">Prepared for another future genre or sequel-like concept.</p>
+            <p class="t-ar">مجهزة لنوع مستقبلي آخر أو فكرة تشبه الجزء التالي.</p>
+            <div class="game-tags"><span class="pill">Genre</span><span class="pill">Build</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 07</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Alpha</span></div>
+            <p class="t-en">Reserved for a smaller title or side experimental project.</p>
+            <p class="t-ar">محجوزة لعنوان أصغر أو مشروع جانبي تجريبي.</p>
+            <div class="game-tags"><span class="pill">Experimental</span><span class="pill">Side</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 08</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Design</span></div>
+            <p class="t-en">Another future project card ready for the final name later.</p>
+            <p class="t-ar">بطاقة مشروع مستقبلية أخرى جاهزة للاسم النهائي لاحقًا.</p>
+            <div class="game-tags"><span class="pill">Name Later</span><span class="pill">Reveal</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 09</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Queue</span></div>
+            <p class="t-en">A reserved slot for a more ambitious long-term future game.</p>
+            <p class="t-ar">خانة محجوزة للعبة مستقبلية أكثر طموحًا على المدى الطويل.</p>
+            <div class="game-tags"><span class="pill">Long Term</span><span class="pill">AAA Feel</span></div>
+          </div></div>
+
+          <div class="game-card reveal"><div class="inner">
+            <div class="game-thumb"><div class="game-badge">Project 10</div></div>
+            <div class="game-head"><h3>Coming Soon</h3><span class="status">Vision</span></div>
+            <p class="t-en">The final placeholder slot to show the brand is prepared for more.</p>
+            <p class="t-ar">آخر خانة توضح أن البراند مستعد للمزيد.</p>
+            <div class="game-tags"><span class="pill">Vision</span><span class="pill">Growth</span></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dashboard">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">Dashboard</span>
+              <span class="t-ar">لوحة التحكم</span>
+            </div>
+            <h2 class="t-en">A fake cinematic command center</h2>
+            <h2 class="t-ar">مركز تحكم سينمائي خيالي</h2>
+          </div>
+          <p class="t-en">
+            This section is intentionally futuristic and stylized to make the site feel more advanced.
+          </p>
+          <p class="t-ar">
+            هذا القسم مستقبلي ومصمم عمدًا ليجعل الموقع يبدو أكثر تقدمًا.
+          </p>
+        </div>
+
+        <div class="dashboard">
+          <div class="dash-card reveal">
+            <div class="inner">
+              <div class="dash-screen">
+                <canvas id="dashCanvas"></canvas>
+                <div class="dash-overlay">
+                  <div class="dash-mini">
+                    <strong>10</strong>
+                    <span class="t-en">Game Slots</span>
+                    <span class="t-ar">خانات ألعاب</span>
+                  </div>
+                  <div class="dash-mini">
+                    <strong>AI</strong>
+                    <span class="t-en">Creative Ideas</span>
+                    <span class="t-ar">أفكار إبداعية</span>
+                  </div>
+                  <div class="dash-mini">
+                    <strong>LIVE</strong>
+                    <span class="t-en">Brand Motion</span>
+                    <span class="t-ar">حركة البراند</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card reveal">
+            <div class="inner">
+              <div class="icon">🧠</div>
+              <h3 class="t-en">NEXA AI Vision</h3>
+              <h3 class="t-ar">رؤية NEXA الذكية</h3>
+              <p class="t-en">
+                A future concept area for smart assistance, concept generation, task structure,
+                and automated creative support around the brand.
+              </p>
+              <p class="t-ar">
+                مساحة مفاهيمية مستقبلية للمساعدة الذكية وتوليد الأفكار وتنظيم المهام ودعم الإبداع حول البراند.
+              </p>
+
+              <div class="dashboard-actions">
+                <span class="pill">AI Ideas</span>
+                <span class="pill">Systems</span>
+                <span class="pill">Creative Flow</span>
+                <span class="pill">Automation</span>
+              </div>
+
+              <div class="tiny-pills">
+                <span class="pill t-en">Future Chatbot</span>
+                <span class="pill t-ar">شات بوت مستقبلي</span>
+                <span class="pill t-en">Project Assistant</span>
+                <span class="pill t-ar">مساعد مشاريع</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <section class="section" id="jobs">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">Jobs & Hiring</span>
+              <span class="t-ar">التوظيف</span>
+            </div>
+            <h2 class="t-en">Future team positions</h2>
+            <h2 class="t-ar">وظائف الفريق المستقبلية</h2>
+          </div>
+          <p class="t-en">
+            These are the roles you wanted to prepare for later, displayed here in a polished hiring section.
+          </p>
+          <p class="t-ar">
+            هذه هي الأدوار التي أردت تجهيزها لاحقًا، معروضة هنا داخل قسم توظيف مصقول.
+          </p>
+        </div>
+
+        <div class="grid-4">
+          <div class="job-card reveal"><div class="inner">
+            <div class="icon">💻</div>
+            <h3>Full Stack Web Developer</h3>
+            <p class="t-en">Frontend, backend, clean interfaces, scalable systems, and modern web architecture.</p>
+            <p class="t-ar">واجهة وخلفية وواجهات نظيفة وأنظمة قابلة للتوسع وبنية ويب حديثة.</p>
+          </div></div>
+
+          <div class="job-card reveal"><div class="inner">
+            <div class="icon">🎮</div>
+            <h3>C# / C++ Unity & Unreal</h3>
+            <p class="t-en">Gameplay systems, mechanics, optimization, prototyping, and long-term game development.</p>
+            <p class="t-ar">أنظمة اللعب والميكانيك والتحسين والنماذج الأولية وتطوير الألعاب على المدى الطويل.</p>
+          </div></div>
+
+          <div class="job-card reveal"><div class="inner">
+            <div class="icon">🧱</div>
+            <h3>3D Designer (Blender)</h3>
+            <p class="t-en">Models, environments, props, hard-surface work, visual direction, and scene design.</p>
+            <p class="t-ar">نماذج وبيئات وعناصر وأعمال هارد سيرفس وتوجه بصري وتصميم مشاهد.</p>
+          </div></div>
+
+          <div class="job-card reveal"><div class="inner">
+            <div class="icon">🎬</div>
+            <h3>Video Editor / Social Media</h3>
+            <p class="t-en">Montage, short-form content, posting workflow, social visibility, and visual storytelling.</p>
+            <p class="t-ar">مونتاج ومحتوى قصير ونشر على السوشال وزيادة الظهور وسرد بصري.</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="extra">
+      <div class="container">
+        <div class="grid-3">
+          <div class="lang-card reveal"><div class="inner">
+            <div class="icon">🌍</div>
+            <h3 class="t-en">Language System</h3>
+            <h3 class="t-ar">نظام اللغة</h3>
+            <p class="t-en">Arabic and English are both available, while core brand names stay in English for style.</p>
+            <p class="t-ar">العربية والإنجليزية متاحتان، بينما تبقى أسماء البراند الأساسية بالإنجليزية للحفاظ على الهيبة.</p>
+          </div></div>
+
+          <div class="music-card reveal"><div class="inner">
+            <div class="icon">🎵</div>
+            <h3 class="t-en">Music Note</h3>
+            <h3 class="t-ar">ملاحظة الموسيقى</h3>
+            <p class="t-en">
+              Suggested vibe: dark, futuristic, calm, atmospheric synth.
+              Example mood: “After Dark” style.
+            </p>
+            <p class="t-ar">
+              الجو المقترح: داكن ومستقبلي وهادئ وجوي باستخدام synth.
+              مثال في الإحساس: أسلوب قريب من “After Dark”.
+            </p>
+            <div class="music-note t-en">
+              Comment in code shows where to place your music file later.
+            </div>
+            <div class="music-note t-ar">
+              هناك تعليق داخل الكود يوضح مكان وضع ملف الموسيقى لاحقًا.
+            </div>
+          </div></div>
+
+          <div class="universe-card reveal"><div class="inner">
+            <div class="icon">✨</div>
+            <h3 class="t-en">Universe Potential</h3>
+            <h3 class="t-ar">إمكانات العالم</h3>
+            <p class="t-en">NEXA can later become a full ecosystem: games, tools, visuals, content, and more.</p>
+            <p class="t-ar">يمكن لـ NEXA لاحقًا أن يصبح منظومة كاملة: ألعاب وأدوات وهوية بصرية ومحتوى وأكثر.</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">
+              <span class="t-en">Contact</span>
+              <span class="t-ar">التواصل</span>
+            </div>
+            <h2 class="t-en">Simple contact for now</h2>
+            <h2 class="t-ar">تواصل بسيط حاليًا</h2>
+          </div>
+          <p class="t-en">
+            For now, the easiest and smartest approach is direct contact: WhatsApp and Email.
+          </p>
+          <p class="t-ar">
+            حاليًا، أسهل وأذكى حل هو التواصل المباشر: واتساب وإيميل.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="contact-card reveal">
+            <div class="inner contact-direct">
+              <h3 class="t-en">Direct Contact Methods</h3>
+              <h3 class="t-ar">طرق التواصل المباشرة</h3>
+
+              <div class="contact-box">
+                <strong class="t-en">WhatsApp</strong>
+                <strong class="t-ar">واتساب</strong>
+                <p class="t-en">Tap the button below to open chat directly.</p>
+                <p class="t-ar">اضغط الزر في الأسفل لفتح المحادثة مباشرة.</p>
+
+                <!-- 🔴 غير الرقم لاحقًا من هون -->
+                <div class="contact-actions">
+                  <a class="btn" href="https://wa.me/96170785639?text=Hello%20NEXA%2C%20I%20want%20to%20contact%20you" target="_blank">
+                    <span class="t-en">Contact on WhatsApp</span>
+                    <span class="t-ar">تواصل عبر واتساب</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-box">
+                <strong class="t-en">Email</strong>
+                <strong class="t-ar">الإيميل</strong>
+                <p class="t-en">Open your email app with a ready message.</p>
+                <p class="t-ar">افتح تطبيق الإيميل مع رسالة جاهزة.</p>
+
+                <!-- 🔴 غير الإيميل لاحقًا من هون إذا بدك -->
+                <div class="contact-actions">
+                  <a class="btn-ghost" href="mailto:nexa.official.team@gmail.com?subject=NEXA%20Contact&body=Hello%20NEXA%2C%20I%20want%20to%20contact%20you">
+                    <span class="t-en">Contact via Email</span>
+                    <span class="t-ar">تواصل عبر الإيميل</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card reveal">
+            <div class="inner">
+              <h3 class="t-en">Message Preview</h3>
+              <h3 class="t-ar">معاينة الرسالة</h3>
+              <p class="t-en">This is the style of direct contact currently used on the site.</p>
+              <p class="t-ar">هذا هو أسلوب التواصل المباشر المستخدم حاليًا في الموقع.</p>
+
+              <ul class="contact-list">
+                <li class="t-en">Fast and simple</li>
+                <li class="t-ar">سريع وبسيط</li>
+
+                <li class="t-en">No backend needed for now</li>
+                <li class="t-ar">لا يحتاج إلى Back End حاليًا</li>
+
+                <li class="t-en">Perfect for early-stage brand building</li>
+                <li class="t-ar">ممتاز لمرحلة بناء البراند في البداية</li>
+
+                <li class="t-en">Can be upgraded later</li>
+                <li class="t-ar">يمكن تطويره لاحقًا</li>
+              </ul>
+
+              <!-- =========================
+                   OPTIONAL MUSIC
+                   إذا بدك تضيف موسيقى:
+                   1) حط ملف mp3 بنفس المجلد
+                   2) غير music.mp3 لاسم الملف الحقيقي
+                   3) شيل التعليق عن الكود تحت
+
+              <audio autoplay loop>
+                <source src="music.mp3" type="audio/mpeg">
+              </audio>
+              ========================== -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="panel reveal">
+        <div class="inner">
+          <div class="kicker">NEXA</div>
+          <h3 class="t-en">A premium future-facing brand</h3>
+          <h3 class="t-ar">براند فاخر يتجه نحو المستقبل</h3>
+          <p class="t-en">
+            Games, technology, digital creativity, strong presentation, and long-term growth.
+          </p>
+          <p class="t-ar">
+            ألعاب وتقنية وإبداع رقمي وعرض قوي ونمو طويل المدى.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="inner">
+          <h3 class="t-en">Quick Links</h3>
+          <h3 class="t-ar">روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#showcase">Showcase</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop">↑</button>
+
+  <script>
+    const body = document.body;
+    const intro = document.getElementById('intro');
+    const skipIntro = document.getElementById('skipIntro');
+    const langToggle = document.getElementById('langToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const revealEls = [...document.querySelectorAll('.reveal')];
+    const sections = [...document.querySelectorAll('main section')];
+    const faqItems = [...document.querySelectorAll('.faq-item')];
+    const scrollTopBtn = document.getElementById('scrollTop');
+
+    body.setAttribute('data-lang', 'en');
+
+    // language toggle
+    langToggle.addEventListener('click', () => {
+      const current = body.getAttribute('data-lang');
+      if(current === 'en'){
+        body.setAttribute('data-lang','ar');
+        langToggle.textContent = 'EN';
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      }else{
+        body.setAttribute('data-lang','en');
+        langToggle.textContent = 'AR';
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+      }
+    });
+
+    // mobile menu
+    menuToggle?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuToggle.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        if(menuToggle) menuToggle.textContent = '☰';
+      });
+    });
+
+    // intro
+    const hideIntro = () => intro.classList.add('hide');
+    skipIntro.addEventListener('click', hideIntro);
+    setTimeout(hideIntro, 3500);
+
+    // reveal on scroll
+    const revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.14});
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // active nav + scroll top
+    function setActiveNav(){
+      const y = window.scrollY + 130;
+      let current = 'home';
+      sections.forEach(sec => {
+        if(y >= sec.offsetTop) current = sec.id;
+      });
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href')?.replace('#','');
+        link.classList.toggle('active', href === current);
+      });
+      scrollTopBtn.classList.toggle('show', window.scrollY > 500);
+    }
+
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav();
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // FAQ
+    faqItems.forEach(item => {
+      const q = item.querySelector('.faq-q');
+      q?.addEventListener('click', () => {
+        const open = item.classList.contains('open');
+        faqItems.forEach(i => i.classList.remove('open'));
+        if(!open) item.classList.add('open');
+      });
+    });
+
+    // STARS BACKGROUND
+    const starsCanvas = document.getElementById('starsCanvas');
+    const starsCtx = starsCanvas.getContext('2d');
+    let stars = [];
+
+    function resizeStars(){
+      starsCanvas.width = window.innerWidth;
+      starsCanvas.height = window.innerHeight;
+      const count = Math.min(180, Math.floor((window.innerWidth * window.innerHeight) / 12000));
+      stars = Array.from({length:count}, () => ({
+        x: Math.random() * starsCanvas.width,
+        y: Math.random() * starsCanvas.height,
+        r: Math.random() * 1.8 + .2,
+        a: Math.random() * .7 + .15,
+        speed: Math.random() * .08 + .02,
+        twinkle: Math.random() * .02 + .004
+      }));
+    }
+
+    function drawStars(){
+      starsCtx.clearRect(0,0,starsCanvas.width,starsCanvas.height);
+      for(const s of stars){
+        s.a += Math.sin(Date.now() * s.twinkle) * .002;
+        s.y += s.speed;
+        if(s.y > starsCanvas.height + 4){
+          s.y = -4;
+          s.x = Math.random() * starsCanvas.width;
+        }
+        starsCtx.beginPath();
+        starsCtx.fillStyle = `rgba(210,235,255,${Math.max(.08, Math.min(.85, s.a))})`;
+        starsCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        starsCtx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    // INTRO CANVAS
+    const introCanvas = document.getElementById('introCanvas');
+    const introCtx = introCanvas.getContext('2d');
+    let introParts = [];
+
+    function resizeIntro(){
+      const rect = introCanvas.parentElement.getBoundingClientRect();
+      introCanvas.width = rect.width;
+      introCanvas.height = rect.height;
+      const cx = introCanvas.width / 2;
+      const cy = introCanvas.height / 2;
+      const maxR = Math.min(cx, cy) * .9;
+      introParts = Array.from({length:420}, () => ({
+        radius: Math.random() * maxR,
+        angle: Math.random() * Math.PI * 2,
+        size: Math.random() * 2 + .4,
+        speed: .0018 + Math.random() * .006,
+        drift: .12 + Math.random() * .32,
+        alpha: Math.random() * .7 + .18,
+        hue: Math.random() > .35 ? 210 : 265
+      }));
+    }
+
+    function drawIntro(){
+      const w = introCanvas.width;
+      const h = introCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const maxR = Math.min(cx, cy) * .88;
+
+      introCtx.clearRect(0,0,w,h);
+
+      const g = introCtx.createRadialGradient(cx,cy,maxR*.03,cx,cy,maxR);
+      g.addColorStop(0,'rgba(0,0,0,.96)');
+      g.addColorStop(.16,'rgba(2,8,14,.96)');
+      g.addColorStop(.34,'rgba(17,28,46,.38)');
+      g.addColorStop(.58,'rgba(74,165,255,.12)');
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      introCtx.fillStyle = g;
+      introCtx.fillRect(0,0,w,h);
+
+      for(const p of introParts){
+        p.angle += p.speed;
+        p.radius -= p.drift * .12;
+        if(p.radius < maxR * .12){
+          p.radius = maxR * (.65 + Math.random() * .3);
+          p.angle = Math.random() * Math.PI * 2;
+        }
+        const spiral = 1 + (maxR - p.radius) / maxR * 2.4;
+        const x = cx + Math.cos(p.angle * spiral) * p.radius;
+        const y = cy + Math.sin(p.angle * spiral) * p.radius * .78;
+
+        introCtx.beginPath();
+        introCtx.fillStyle = `hsla(${p.hue},100%,72%,${p.alpha})`;
+        introCtx.shadowBlur = 14;
+        introCtx.shadowColor = p.hue === 210 ? 'rgba(74,165,255,.55)' : 'rgba(138,107,255,.45)';
+        introCtx.arc(x,y,p.size,0,Math.PI*2);
+        introCtx.fill();
+      }
+
+      introCtx.shadowBlur = 0;
+      requestAnimationFrame(drawIntro);
+    }
+
+    // HERO CANVAS
+    const heroCanvas = document.getElementById('heroCanvas');
+    const heroCtx = heroCanvas.getContext('2d');
+    let heroParts = [];
+
+    function resizeHero(){
+      const rect = heroCanvas.parentElement.getBoundingClientRect();
+      heroCanvas.width = rect.width;
+      heroCanvas.height = rect.height;
+      const cx = heroCanvas.width / 2;
+      const cy = heroCanvas.height / 2;
+      const maxR = Math.min(cx, cy) * .88;
+      heroParts = Array.from({length:360}, () => ({
+        radius: Math.random() * maxR,
+        angle: Math.random() * Math.PI * 2,
+        size: Math.random() * 2 + .4,
+        speed: .0015 + Math.random() * .004,
+        alpha: Math.random() * .6 + .18,
+        hue: Math.random() > .25 ? 210 : 260
+      }));
+    }
+
+    function drawHero(){
+      const w = heroCanvas.width;
+      const h = heroCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const maxR = Math.min(cx, cy) * .88;
+
+      heroCtx.clearRect(0,0,w,h);
+
+      for(const p of heroParts){
+        p.angle += p.speed;
+        const x = cx + Math.cos(p.angle * 2.2) * p.radius;
+        const y = cy + Math.sin(p.angle * 2.2) * p.radius * .78;
+
+        heroCtx.beginPath();
+        heroCtx.fillStyle = `hsla(${p.hue},100%,72%,${p.alpha})`;
+        heroCtx.shadowBlur = 12;
+        heroCtx.shadowColor = p.hue === 210 ? 'rgba(74,165,255,.45)' : 'rgba(138,107,255,.38)';
+        heroCtx.arc(x,y,p.size,0,Math.PI*2);
+        heroCtx.fill();
+      }
+
+      heroCtx.shadowBlur = 0;
+      requestAnimationFrame(drawHero);
+    }
+
+    // DASHBOARD CANVAS
+    const dashCanvas = document.getElementById('dashCanvas');
+    const dashCtx = dashCanvas.getContext('2d');
+    let dashLines = [];
+
+    function resizeDash(){
+      const rect = dashCanvas.parentElement.getBoundingClientRect();
+      dashCanvas.width = rect.width;
+      dashCanvas.height = rect.height;
+      dashLines = Array.from({length:48}, (_,i)=>({
+        y: 20 + i * 8,
+        x: Math.random() * dashCanvas.width,
+        w: 80 + Math.random() * 180,
+        speed: 1 + Math.random() * 2.4
+      }));
+    }
+
+    function drawDash(){
+      const w = dashCanvas.width;
+      const h = dashCanvas.height;
+      dashCtx.clearRect(0,0,w,h);
+
+      for(const l of dashLines){
+        l.x += l.speed;
+        if(l.x > w + 50) l.x = -l.w - 50;
+        const grad = dashCtx.createLinearGradient(l.x,0,l.x+l.w,0);
+        grad.addColorStop(0,'rgba(0,0,0,0)');
+        grad.addColorStop(.5,'rgba(111,227,255,.55)');
+        grad.addColorStop(1,'rgba(0,0,0,0)');
+        dashCtx.fillStyle = grad;
+        dashCtx.fillRect(l.x, l.y, l.w, 2);
+      }
+
+      requestAnimationFrame(drawDash);
+    }
+
+    function resizeAll(){
+      resizeStars();
+      resizeIntro();
+      resizeHero();
+      resizeDash();
+    }
+
+    window.addEventListener('resize', resizeAll);
+    resizeAll();
+    drawStars();
+    drawIntro();
+    drawHero();
+    drawDash();
+  </script>
+</body>
+</html>
